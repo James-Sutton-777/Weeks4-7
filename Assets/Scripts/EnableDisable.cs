@@ -9,6 +9,9 @@ public class EnableDisable : MonoBehaviour
     public EnableDisable script;
 
     public GameObject go;
+
+    public AudioSource audioS;
+    public AudioClip ac;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +26,7 @@ public class EnableDisable : MonoBehaviour
             //sr.enabled = false;
 
             //script.enabled = false;
-            go.SetActive(false);
+            //go.SetActive(false);
             
         }
 
@@ -32,9 +35,20 @@ public class EnableDisable : MonoBehaviour
             //sr.enabled = true;
 
             //script.enabled = true;
-            
-            go.SetActive(true);
 
+            //go.SetActive(true);
+            audioS.PlayOneShot(ac);
+
+        }
+        
+        if(Input.GetKey(KeyCode.Space))
+        {
+            //so it only plays when no audio is playing
+            if (audioS.isPlaying == false)
+            {
+                //audioS.Play();
+                //audioS.PlayOneShot(ac);
+            }
         }
     }
 }
