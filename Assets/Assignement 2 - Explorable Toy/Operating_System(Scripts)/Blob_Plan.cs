@@ -4,30 +4,36 @@ using UnityEngine;
 
 public class Blob_Plan : MonoBehaviour
 {
+    public GameObject crusher;
+
+    SpriteRenderer burn;
+
     public AnimationCurve idle;
     [Range(0, 1)]
     public float b;
 
-    bool neutral = true;
-    bool flatten = false;
-    bool perish = false;
+    public bool neutral = true;
+    public bool flatten = false;
+    public bool perish = false;
     float timer = 0;
     public float rate;
+    public float perishRate;
     // Start is called before the first frame update
     void Start()
     {
-        
+        burn = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
         timer += 1 * Time.deltaTime;
-        Debug.Log(timer);
+        
         if(neutral == true)
         {
             Idle();
         }
+        
     }
 
     void Idle()
@@ -39,4 +45,26 @@ public class Blob_Plan : MonoBehaviour
         animOne.x = Mathf.Lerp(0.8f, 1.2f, idle.Evaluate(b));
         transform.localScale = animOne;
     }
+    
+    public void Gonzo()
+    {
+        neutral = false;
+        flatten = false;
+        perish = true;
+
+        Vector2 animTwo = transform.localScale;
+        if (animTwo.y >= 0)
+        {
+            animTwo.y -= perishRate;
+            animTwo.x -= perishRate;
+            transform.localScale = animTwo;
+        }
+
+        Color burnt = burn.color;
+        burnt.b -= 1;
+        burnt.g -= 1;
+        burnt.r -= 1;
+        burn.color = burnt;
+    }
+
 }
