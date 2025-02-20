@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Blob_Plan : MonoBehaviour
 {
-    public GameObject crusher;
 
     public Slider squashSlider;
 
@@ -40,6 +39,15 @@ public class Blob_Plan : MonoBehaviour
         if (perish == true)
         {
             Gonzo();
+        }
+        if(squashSlider.value > 0)
+        {
+            neutral = false;
+            Squish();
+        }
+        else if(perish == false)
+        {
+            neutral = true;
         }
 
         Die();
@@ -80,7 +88,7 @@ public class Blob_Plan : MonoBehaviour
     {
         Vector2 animTre = transform.localScale;
         
-            animTre.y = squashSlider.value;
+            animTre.y = 1 - squashSlider.value;
             transform.localScale = animTre;
      
     }
@@ -92,6 +100,7 @@ public class Blob_Plan : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
 
     }
 }
