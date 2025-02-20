@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Blob_Plan : MonoBehaviour
 {
 
-    //public Slider squashSlider;
+    public Slider squashSlider;
 
     SpriteRenderer burn;
 
@@ -15,7 +15,6 @@ public class Blob_Plan : MonoBehaviour
     public float b;
 
     public bool neutral = true;
-    public bool flatten = false;
     public bool perish = false;
     float timer = 0;
     public float rate;
@@ -31,26 +30,26 @@ public class Blob_Plan : MonoBehaviour
     {
         timer += 1 * Time.deltaTime;
         
-        if(neutral == true)
+        if((neutral == true) && (perish == false))
         {
             Idle();
         }
 
-        if (perish == true)
+        if(squashSlider.value > 0)
         {
-            Gonzo();
+            neutral = false;
+            Squish();
         }
-       // if(squashSlider.value > 0)
-       // {
-        //    neutral = false;
-       //     Squish();
-       // }
-        else if(perish == false)
+        else
         {
             neutral = true;
         }
+        
+        if(squashSlider.value == 1)
+        {
+            perish = true;
 
-        Die();
+        }
     }
 
     void Idle()
@@ -58,49 +57,27 @@ public class Blob_Plan : MonoBehaviour
         b = timer % rate;
 
         Vector2 animOne = transform.localScale;
-        animOne.y = Mathf.Lerp(0.8f, 1.2f, idle.Evaluate(b));
-        animOne.x = Mathf.Lerp(0.8f, 1.2f, idle.Evaluate(b));
+        animOne.y = Mathf.Lerp(2.4f, 3, idle.Evaluate(b));
+        animOne.x = Mathf.Lerp(2.4f, 3, idle.Evaluate(b));
         transform.localScale = animOne;
     }
     
-    public void Gonzo()
-    {
-        neutral = false;
-        flatten = false;
-        perish = true;
-
-        Vector2 animTwo = transform.localScale;
-        if (animTwo.y >= 0)
-        {
-            animTwo.y -= perishRate;
-            animTwo.x -= perishRate;
-            transform.localScale = animTwo;
-        }
-
-        Color burnt = burn.color;
-        burnt.b -= 1;
-        burnt.g -= 1;
-        burnt.r -= 1;
-        burn.color = burnt;
-    }
 
     public void Squish()
     {
-        //Vector2 animTre = transform.localScale;
-        
-           // animTre.y = 1 - squashSlider.value;
-            //transform.localScale = animTre;
+        if (perish == false)
+        {
+            Vector2 animTre = transform.localScale;
+
+            animTre.y = 3 - (3 * squashSlider.value);
+            transform.localScale = animTre;
+        }
      
     }
 
-    public void Die()
+    public void ResetBlob()
     {
-        Vector2 lifeInsurance = transform.localScale;
-        if (lifeInsurance.y <= 0)
-        {
-            Destroy(gameObject);
-        }
-
-
+        perish = false;
+        neutral = true;
     }
 }
