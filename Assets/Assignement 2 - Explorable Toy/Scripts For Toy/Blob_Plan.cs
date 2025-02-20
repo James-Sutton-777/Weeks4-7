@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Blob_Plan : MonoBehaviour
 {
 
-    public Slider squashSlider;
+    //public Slider squashSlider;
 
     SpriteRenderer burn;
 
@@ -40,11 +40,11 @@ public class Blob_Plan : MonoBehaviour
         {
             Gonzo();
         }
-        if(squashSlider.value > 0)
-        {
-            neutral = false;
-            Squish();
-        }
+       // if(squashSlider.value > 0)
+       // {
+        //    neutral = false;
+       //     Squish();
+       // }
         else if(perish == false)
         {
             neutral = true;
@@ -65,9 +65,9 @@ public class Blob_Plan : MonoBehaviour
     
     public void Gonzo()
     {
-        //neutral = false;
-        //flatten = false;
-        //perish = true;
+        neutral = false;
+        flatten = false;
+        perish = true;
 
         Vector2 animTwo = transform.localScale;
         if (animTwo.y >= 0)
@@ -86,10 +86,10 @@ public class Blob_Plan : MonoBehaviour
 
     public void Squish()
     {
-        Vector2 animTre = transform.localScale;
+        //Vector2 animTre = transform.localScale;
         
-            animTre.y = 1 - squashSlider.value;
-            transform.localScale = animTre;
+           // animTre.y = 1 - squashSlider.value;
+            //transform.localScale = animTre;
      
     }
 

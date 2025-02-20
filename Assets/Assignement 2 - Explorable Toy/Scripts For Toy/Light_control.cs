@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class Light_control : MonoBehaviour
 {
@@ -31,6 +33,7 @@ public class Light_control : MonoBehaviour
         if(lights == false)
         {
             t += 2 * Time.deltaTime;
+
         }
     }
 
