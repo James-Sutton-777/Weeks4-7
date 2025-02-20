@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class SpawnerButton : MonoBehaviour
 {
+    //control script to instantiate particles in background
+
+    //create public game object
     public GameObject particle;
     // Start is called before the first frame update
     void Start()
@@ -17,8 +20,11 @@ public class SpawnerButton : MonoBehaviour
         
     }
 
+    //public function to be called by button
+    //spawns particle
     public void SpawnParticle()
     {
+        //spawn particle
         Instantiate(particle);
     }
 }
