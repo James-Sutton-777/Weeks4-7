@@ -29,4 +29,9 @@ public class Crusher_Command : MonoBehaviour
         //add back to transfrom to modify sprite
         transform.position = piston;
     }
+
+    public void SliderReset()
+    {
+        crusherSlider.value = 0;
+    }
 }
